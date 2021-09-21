@@ -30,9 +30,9 @@ def checkview(request):
 def send(request):
     message = request.POST['message']
     username = request.POST['username']
-    room_id = request.POST['room_id']
+    roomt = Room.objects.get(id=request.POST['room_id']) 
 
-    new_message = Message.objects.create(value=message, user=username, room=room_id)
+    new_message = Message.objects.create(value=message, user=username, room=roomt)
     new_message.save()
     return HttpResponse('Message sent successfully')
 
