@@ -1,31 +1,22 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{% static 'home/style.css' %}" type="text/css">
-</head>
-<body>
+{% extends "layout/basic.html" %}
+{% block content %}
 
-<div align="center">
-    <h2>Django Chat</h2>
+<div class="home">
+    <div align="center">
+        <h2>Django Chat</h2>
+    </div>
+    <div class="container">
+            <form id="post-form" method="POST" action="checkview">
+                {% csrf_token %}
+                <label>Room Name</label>
+                <input type="text" name="room_name" id="room_name" width="100px" />
+                <input type="hidden" name="username" id="username" value="{{user.username}}"/>
+                <!-- <label>Username</label>
+                <input type="text" name="username" id="username" width="100px" /> -->
+                <input type="submit" value="Enter Room">
+            </form>
+    </div>
 </div>
 
+{% endblock %}
 
-<div class="container">
-
-    <form id="post-form" method="POST" action="checkview">
-        {% csrf_token %}
-        <label>Room Name</label>
-        <input type="text" name="room_name" id="room_name" width="100px" />
-        <label>Username</label>
-        <input type="text" name="username" id="username" width="100px" />
-        <input type="submit" value="Enter Room">
-    </form>
-</div>
-
-
-</body>
-
-
-</html>

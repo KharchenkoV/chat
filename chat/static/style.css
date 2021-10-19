@@ -1,0 +1,221 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"); */
+
+/* @font-face {
+  font-family: AstroSpace;
+  src: url(/fonts/AstroSpace.ttf);
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    /* background-color: #212c3b; */
+  }
+  
+  header {
+    background-color: #141b25;
+  }
+  
+  .main-nav {
+    height: 90px;
+  }
+  
+  .logo {
+    color: white;
+    line-height: 90px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 30px;
+    font-family: "AstroSpace", sans-serif;
+  }
+  
+  .navlinks {
+    list-style: none;
+    float: right;
+    line-height: 90px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navlinks li {
+    display: inline-block;
+    margin: 0px 20px;
+  }
+  
+  .navlinks li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s linear 0s;
+    text-transform: uppercase;
+  }
+  
+  .navlinks li a:hover {
+    color: #7ebcb9;
+    padding-bottom: 7px;
+    border-bottom: 2px solid #7ebcb9;
+  }
+  
+  li a.contact {
+    background-color: #00adb5;
+    padding: 9px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease 0s;
+    border-bottom: none;
+  }
+  
+  li a.contact:hover {
+    background-color: #047e85;
+    color: white;
+    border-bottom: none;
+  }
+  
+  #check {
+    display: none;
+  }
+  
+  .menu-btn {
+    font-size: 25px;
+    color: white;
+    float: right;
+    line-height: 90px;
+    margin-right: 40px;
+    display: none;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 800px) {
+    .navlinks {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      text-align: center;
+      transition: all 0.5s;
+      right: -100%;
+      background: #222831;
+    }
+  
+    .navlinks li {
+      display: block;
+    }
+  
+    .navlinks li a {
+      font-size: 20px;
+    }
+  
+    .navlinks li a:hover {
+      border-bottom: none;
+    }
+  
+    .menu-btn {
+      display: block;
+    }
+  
+    /* #check:checked ~ .navlinks {
+      right: 0;
+    } */
+  }
+  
+  @media (max-width: 360px) {
+    .logo {
+      margin-left: 10px;
+      font-size: 25px;
+    }
+  
+    .menu-btn {
+      margin-right: 10px;
+      font-size: 25px;
+    }
+  
+    .menu-btn:focus {
+      color: blue;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .home{
+      max-width: 800px;
+      margin: 0 auto;
+  }
+  
+  .container {
+      border: 2px solid #dedede;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    
+    .darker {
+      border-color: #ccc;
+      background-color: #fff;
+    }
+    
+    .container::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    .container img {
+      float: left;
+      max-width: 60px;
+      width: 100%;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
+    
+    .container img.right {
+      float: right;
+      margin-left: 20px;
+      margin-right:0;
+    }
+    
+    .time-right {
+      float: right;
+      color: #aaa;
+    }
+    
+    .time-left {
+      float: left;
+      color: #999;
+    }
+  
+    input[type=text],input[type=password], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      }
+  
+      input[type=submit] {
+      width: 100%;
+      background-color: #00adb5;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      }
+  
+      input[type=submit]:hover {
+      background-color: #047e85;
+      }
+  
+      div {
+      border-radius: 5px;
+      background-color: #fff;
+      padding: 20px;
+      }
