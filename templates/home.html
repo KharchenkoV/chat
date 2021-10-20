@@ -10,7 +10,7 @@
                 {% csrf_token %}
                 <label>Room Name</label>
                 <input type="text" name="room_name" id="room_name" width="100px" />
-                <input type="hidden" name="username" id="username" value="{{user.username}}"/>
+                <input type="hidden" name="user" id="user" value="{{user}}"/>
                 <!-- <label>Username</label>
                 <input type="text" name="username" id="username" width="100px" /> -->
                 <input type="submit" value="Enter Room">

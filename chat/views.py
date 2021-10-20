@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.checks import messages
 from django.shortcuts import render, redirect
 from chat.models import Room, Message
@@ -15,10 +16,11 @@ def home(request):
 
 @login_required
 def room(request, room):
-    username = request.GET.get('username')
+    username = request.GET.get('user')
+    user = User.objects.get(username=username)
     room_details = Room.objects.get(name=room)
     return render(request, 'room.html',{
-        'username' : username,
+        'user' : user,
         'room' : room,
         'room_details' : room_details,
     })
@@ -26,21 +28,21 @@ def room(request, room):
 @login_required
 def checkview(request):
     room = request.POST['room_name']
-    username = request.POST['username']
+    user = request.POST['user']
 
     if Room.objects.filter(name=room).exists():
-        return redirect('/' + room + '/?username='+username)
+        return redirect('/' + room + '/?user='+user)
     else:
         new_room = Room.objects.create(name=room)
         new_room.save()
-        return redirect('/' + room + '/?username='+username)
+        return redirect('/' + room + '/?user='+user)
 
 def send(request):
     message = request.POST['message']
-    username = request.POST['username']
+    usert = User.objects.get(username=request.POST['user'])
     roomt = Room.objects.get(id=request.POST['room_id']) 
 
-    new_message = Message.objects.create(value=message, user=username, room=roomt)
+    new_message = Message.objects.create(value=message, user=usert, room=roomt)
     new_message.save()
     return HttpResponse('Message sent successfully')
 
@@ -48,7 +50,8 @@ def getMessages(request, room):
     room_details = Room.objects.get(name=room)
 
     messages = Message.objects.filter(room=room_details.id)
-    return JsonResponse({"messages":list(messages.values())})
+    
+    return JsonResponse({"messages":list(messages.values('value', 'date', 'user__username'))})
 
 class UserLoginView(LoginView):
     template_name = 'user/login.html'
