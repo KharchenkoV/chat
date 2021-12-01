@@ -1,51 +1,73 @@
 {% extends "layout/basic.html" %}
 {% load static %}
 
-
+{% block title %} {{room}} {% endblock %}
 
 {% block content %}
-<div class="home">
-  <h2>{{room}} - DjChat</h2>
-
-<div id="display">
+<div class="wrapper">
+  <aside>
+    <h1>Меню чату</h1>
+    <ul>
+      <li><h2>Назва чату: {{room}}</h2></li>
+      <li><h2>Кількість учасників: {{count}}</h2></li>
+      <li class="edit"><h2>Редагувати чат</h2><a class="upd" href="{% url 'update_room' room %}"></a></li>
+      <li><h2>Список учасників:</h2></li>
+      <ul class="user-list">
+        {% for u in users %}
+        {% if user != u %}
+        <li><a href="">{{u}}</a><a class="del" href="{% url 'delete_user' room u.username %}">видалити</a></li>
+        {% else %}
+        <li><a href="">{{u}}</a></li>
+        {% endif %}
+        {% endfor %}
+        <a id="addbutton" href="{% url 'add_users' room %}"></a>
+      </ul>
+      <li class="edit" ><h2>Видалити чат</h2><a class="upd" id="delete" href="{% url 'delete_room' room %}"></a></li>
+    </ul>
+  </aside>
+  <div class="home" id="rrr">
+  
+  <div id="display">
+  </div>
+  
+  <script>
+  $(document).ready(function(){
+  
+  setInterval(function(){
+      $.ajax({
+          type: 'GET',
+          url : "/getMessages/{{room}}/",
+          success: function(response){
+              console.log(response);
+              $("#display").empty();
+              for (var key in response.messages)
+              {
+                  var temp="<div class='container darker'><b>"+response.messages[key].user__username+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
+                  $("#display").append(temp);
+              }
+          },
+          error: function(response){
+              alert('An error occured')
+          }
+      });
+  },1000);
+  })
+  </script>
+  
+  
+  <div class="container">
+      {{user}}
+      <form id="post-form">
+          {% csrf_token %}
+          <input type="hidden" name="user" id="user" value="{{user}}"/>
+          <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
+          <input type="text" name="message" id="message" width="100px" />
+          <input type="submit" value="Send">
+      </form>
+  </div>
+  </div>
 </div>
 
-<script>
-$(document).ready(function(){
-
-setInterval(function(){
-    $.ajax({
-        type: 'GET',
-        url : "/getMessages/{{room}}/",
-        success: function(response){
-            console.log(response);
-            $("#display").empty();
-            for (var key in response.messages)
-            {
-                var temp="<div class='container darker'><b>"+response.messages[key].user__username+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
-                $("#display").append(temp);
-            }
-        },
-        error: function(response){
-            alert('An error occured')
-        }
-    });
-},1000);
-})
-</script>
-
-
-<div class="container">
-    {{user}}
-    <form id="post-form">
-        {% csrf_token %}
-        <input type="hidden" name="user" id="user" value="{{user}}"/>
-        <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
-        <input type="text" name="message" id="message" width="100px" />
-        <input type="submit" value="Send">
-    </form>
-</div>
-</div>
 
 
 <script type="text/javascript">

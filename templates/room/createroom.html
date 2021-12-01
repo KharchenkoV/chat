@@ -1,0 +1,27 @@
+{% extends "layout/basic.html" %}
+{% block title %} Створити чат {% endblock %}
+
+{% block content %}
+<div class="home">
+    <div align="center">
+        <h2>Створення чату</h2>
+    </div>
+    <div class="container">
+            <form id="post-form" method="POST" action="{% url 'checkview' %}">
+                {% csrf_token %}
+                <label>Ім'я чату</label>
+                <input type="text" name="room_name" id="room_name" width="100px" />
+                <label>Учасники:</label><br/>
+                {% for u in users %}
+                {% if u == user %}
+                <input type="checkbox" style="display:none" name="users[]" value="{{u}}" checked>
+                {% else %}
+                <input type="checkbox" name="users[]" value="{{u}}">{{u}}<br/>
+                {% endif %}
+                {% endfor %}
+                <input type="hidden" name="user" id="user" value="{{user}}"/>
+                <input type="submit" value="Створити">
+            </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout/basic.html" %}
+{% block title %} Редагування чату {% endblock %}
+
+{% block content %}
+<div class="home">
+    <div align="center">
+        <h2>Редагування чату</h2>
+    </div>
+    <div class="container">
+            <form id="post-form" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="Створити">
+            </form>
+    </div>
+</div>
+{% endblock %}

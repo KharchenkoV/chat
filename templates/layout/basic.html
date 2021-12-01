@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <title>{% block title %} Головна {% endblock %}</title>
 </head>
@@ -19,7 +20,9 @@
           <a href="{% url 'home' %}" class="logo">Akot chat</a>
           <ul class="navlinks">
             {% if request.user.is_authenticated %}
-            <li><a href="#">Профіль</a></li>
+            {% block content1 %}
+            {% endblock %}
+            <li><a href="{% url 'user_display' user %}">Профіль</a></li>
             <li><a href="{% url 'logout' %}" class="contact">Вийти</a></li>
             {% else %}
             <li><a href="{% url 'register' %}">Реєстрація</a></li>

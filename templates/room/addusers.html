@@ -1,0 +1,22 @@
+{% extends "layout/basic.html" %}
+{% block title %} Додавання нових користувачів {% endblock %}
+
+{% block content %}
+<div class="home">
+    <div align="center">
+        <h2>Додавання нових учасників</h2>
+    </div>
+    <div class="container">
+            <form id="post-form" method="POST" action="{% url 'add' room %}">
+                {% csrf_token %}
+                <label>Ім'я чату: {{room}}</label><br>
+                <label>Учасники:</label><br/>
+                {% for u in users %}
+                <input type="checkbox" name="users[]" value="{{u}}">{{u}}<br/>
+                {% endfor %}
+                <input type="hidden" name="user" id="user" value="{{user}}"/>
+                <input type="submit" value="Додати">
+            </form>
+    </div>
+</div>
+{% endblock %}

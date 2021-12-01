@@ -1,0 +1,19 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+  
+{% block title %} Профіль {% endblock %}
+
+{% block content %}
+<h1 align=center>Дані користувача</h1>
+<div class="user-display">
+    <ul>
+        <li><h1>Логін: {{user}}</h1></li>
+        <li><h1>Електрона пошта: {{user.email}}</h1></li>
+        <li><h1>Ім'я: {{user.first_name}}</h1></li>
+        <li><h1>Прізвище: {{user.last_name}}</h1></li>
+        <li class="edit"><h2>Редагувати Профіль</h2><a class="upd" href="{% url 'user_edit' user %}"></a></li>
+        <li class="edit" ><h2>Видалити Профіль</h2><a class="upd" id="delete" href="{% url 'user_delete' user %}"></a></li>
+    </ul>
+</div>
+
+{% endblock %}

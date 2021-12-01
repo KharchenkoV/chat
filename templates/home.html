@@ -1,22 +1,35 @@
 {% extends "layout/basic.html" %}
+{% block content1 %}
+<li><a href="{% url 'createroom' %}">Створити чат</a></li>
+{% endblock %}
 {% block content %}
-
+{% if request.user.is_authenticated %}
 <div class="home">
     <div align="center">
-        <h2>Django Chat</h2>
+        <h2>Доступні чати</h2>
     </div>
-    <div class="container">
+    <ul class="room-list">
+        {% if not rooms %}
+        <h3 align=center>У вас ще не має чатів</h3>
+        {% endif %}
+        {% for room in rooms %}
+        <li>
+            <p>{{room.name}}</p>
             <form id="post-form" method="POST" action="checkview">
                 {% csrf_token %}
-                <label>Room Name</label>
-                <input type="text" name="room_name" id="room_name" width="100px" />
+                <input type="hidden" name="room_name" id="room_name" value="{{room.name}}" />
                 <input type="hidden" name="user" id="user" value="{{user}}"/>
-                <!-- <label>Username</label>
-                <input type="text" name="username" id="username" width="100px" /> -->
-                <input type="submit" value="Enter Room">
+                <input type="submit" class="sub" value="enter">
             </form>
-    </div>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
-
+{% else %}
+<div class="home">
+    <h1 align=center>Це чат для спілкування студентів АКОТ</h1>
+    <h2 align=center style="padding:30%">Для того щоб розпочати спілкування створіть аккаунт або увійдіть, якщо він уже існує</h2>
+</div>
+{% endif %}
 {% endblock %}
 
